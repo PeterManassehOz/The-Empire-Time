@@ -86,11 +86,36 @@ productsHTML += `
         <option value="10">10</option>
       </select>
     </div>
-    <button class="cart-add js-cart-add">Add to cart</button>
+    <button class="cart-add js-cart-add"
+    data-product-id="${product.id}">Add to cart</button>
     </div>
 </div>
 `;
 });
 
 document.querySelector('.js-element-shop').innerHTML = productsHTML;
-console.log(productsHTML);
+
+document.querySelectorAll('.js-cart-add').forEach((button) => {
+  button.addEventListener('click', () => {
+   const productId = button.dataset.productId;
+
+   let matchingItem;
+
+cart.forEach((item) => {
+if (productId === item.productId) {
+matchingItem = item;
+}
+})
+
+if (matchingItem) {
+  matchingItem.quantity += 1;
+} else {
+  cart.push({
+    productId: productId,
+    quantity: 1
+   });
+}
+   console.log(cart);
+  });
+});
+
