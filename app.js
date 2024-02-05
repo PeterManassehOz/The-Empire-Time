@@ -129,6 +129,22 @@ cartQuantity += item.quantity;
 });
 
 document.querySelector('.js-cart-quantity').innerHTML = cartQuantity;
+
+let totalAmount = 0;
+
+cart.forEach((item) => {
+  const product = products.find((p) => p.id === item.productId);
+
+  if (product) {
+    const productPrice = parseFloat(product.price);
+    if (!isNaN(productPrice)) {
+        totalAmount += item.quantity * productPrice;
+    }
+  }
+})
+
+
+document.querySelector('.total').innerHTML = `$${totalAmount.toFixed(2)}`;
   });
 });
 
