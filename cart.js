@@ -5,7 +5,6 @@ function handleQuantityButtonClick(productId, action) {
 }
 
 function updateCartDisplay(){
-  
 }
 
 function saveCartToLocalStorage() {

@@ -213,3 +213,19 @@ align-items: center;
   font-weight: bold;
   border: none;
 }
+/* Add this to your existing CSS or create a new style block */
+.cart-delete-btn {
+  background-color: red;
+  color: #fff;
+  padding: 5px 10px;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  margin-top: 10px;
+  border-radius: 5px;
+}
+
+.cart-delete-btn:hover {
+  background-color: yellow;
+  color:black;
+}

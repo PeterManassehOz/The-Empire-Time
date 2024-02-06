@@ -101,13 +101,6 @@ document.querySelectorAll('.js-cart-add').forEach((button) => {
   button.addEventListener('click', () => {
    const productId = button.dataset.productId;
 
-   //let matchingItem;
-
-  /* cart.forEach((item) => {
-    if (productId === item.productId){
-      matchingItem = item;
-    }
-   })*/
    const matchingItem = cart.find((item) => item.productId === productId)
 ;
 
@@ -129,6 +122,24 @@ saveCartToLocalStorage();
 updateCartDisplay();
   });
 });
+
+document.querySelector('.js-list-card').addEventListener('click', (event) => {
+  if (event.target.classList.contains('cart-delete-btn')) {
+    const productId = event.target.dataset.productId;
+    handleDeleteButtonClick(productId);
+  }
+});
+
+function handleDeleteButtonClick(productId) {
+  const itemIndex = cart.findIndex((item) => item.productId === productId);
+  if (itemIndex !== -1) {
+    cart.splice(itemIndex, 1);
+    saveCartToLocalStorage();
+    updateCartDisplay();
+  }
+}
+
+
 
 function handleQuantityButtonClick(productId, action) {
   const matchingItem = cart.find((item) => item.productId === productId);
@@ -171,20 +182,24 @@ totalAmount += item.quantity * Number(product.price);
 const listItem = document.createElement('li');
 listItem.innerHTML = `
 <div class="cart-item">
-      <img src="${product.image}" alt="${product.name}" class="cart-item-image" width="100" height="100">
-      <div class="cart-item-details">
-        <span class="cart-item-name">${product.name}</span>
-        <div class="cart-item-info">
-          <div class="cart-item-price">Price: $${(item.quantity * Number(product.price)).toFixed(2)}</div>
-          <div class="cart-item-quantity">
-            <button class="cart-quantity-btn-minus" data-action="decrement" data-product-id="${product.id}">-</button>
-            <span>${item.quantity}</span>
-            <button class="cart-quantity-btn-add" data-action="increment" data-product-id="${product.id}">+</button>
+        <img src="${product.image}" alt="${product.name}" class="cart-item-image" width="100" height="100">
+        <div class="cart-item-details">
+          <span class="cart-item-name">${product.name}</span>
+          <div class="cart-item-info">
+            <div class="cart-item-price">Price: $${(item.quantity * Number(product.price)).toFixed(2)}</div>
+            <div class="cart-item-quantity">
+              <button class="cart-quantity-btn-minus" data-action="decrement" data-product-id="${product.id}">-</button>
+              <span>${item.quantity}</span>
+              <button class="cart-quantity-btn-add" data-action="increment" data-product-id="${product.id}">+</button>
+              <div>
+              <button class="cart-delete-btn" data-product-id="${product.id}">Delete</button></div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
 `;
+
+
 listCard.appendChild(listItem);
 });
 
@@ -208,6 +223,5 @@ document.querySelectorAll('.cart-quantity-btn-minus').forEach((button) => {
     handleQuantityButtonClick(productId, action);
   });
 });
-
 }
 
