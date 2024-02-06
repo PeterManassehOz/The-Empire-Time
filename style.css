@@ -43,7 +43,7 @@ header .shopping span{
   top: 0;
   left: 100%/*calc(100% - 500px)*/;
   width: 500px;
-  background-color: rgb(36, 9, 9);
+  background-color: blue;
   height: 100vh;
   transition: 0.5s;
 }
@@ -154,3 +154,33 @@ button:hover{
 .name {
   font-weight: bolder;
 }
+/* Add these styles to your CSS file or within a <style> tag in your HTML */
+.cart-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.cart-item-image {
+  margin-right: 10px;
+}
+
+.cart-item-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.cart-item-name {
+  margin-bottom: 5px;
+}
+
+.cart-item-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.cart-item-price,
+.cart-item-quantity {
+  margin-top: 5px;
+}
+

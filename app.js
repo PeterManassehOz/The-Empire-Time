@@ -105,7 +105,7 @@ cart.forEach((item) => {
 if (productId === item.productId) {
 matchingItem = item;
 }
-})
+});
 
 const quantitySelector = document.querySelector(
   `.js-quantity-selector-${productId}`
@@ -123,11 +123,39 @@ if (matchingItem) {
 }
 
 let cartQuantity = 0;
+let totalAmount = 0;
+
+const listCard = document.querySelector('.js-list-card');
+listCard.innerHTML = '';
 
 cart.forEach((item) => {
 cartQuantity += item.quantity;
+
+const product = products.find((p) => p.id == item.productId);
+totalAmount += item.quantity * Number(product.price);
+
+const listItem = document.createElement('li');
+listItem.innerHTML = `
+<div class="cart-item">
+    <img src="${product.image}" alt="${product.name}" class="cart-item-image" width="50" height="75">
+    <div class="cart-item-details">
+      <span class="cart-item-name">${product.name}</span>
+      <div class="cart-item-info">
+        <div class="cart-item-price">Price: $${(item.quantity * Number(product.price)).toFixed(2)}</div>
+        <div class="cart-item-quantity">
+          <button class="cart-quantity-btn" data-action="decrement" data-product-id="${product.id}">-</button>
+          <span>${item.quantity}</span>
+          <button class="cart-quantity-btn" data-action="increment" data-product-id="${product.id}">+</button>
+        </div>
+      </div>
+    </div>
+  </div>
+`;
+listCard.appendChild(listItem);
 });
 
 document.querySelector('.js-cart-quantity').innerHTML = cartQuantity;
+document.querySelector('.total').innerHTML = `$${totalAmount.toFixed(2)}`;
   });
 });
+
