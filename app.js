@@ -122,6 +122,36 @@ if (matchingItem) {
    });
 }
 
+updateCartDisplay();
+  });
+});
+
+function handleQuantityButtonClick(productId, action) {
+  const matchingItem = cart.find((item) => item.productId === productId);
+
+  if (matchingItem) {
+    if (action === 'increment') {
+      matchingItem.quantity++;
+    } else if (action === 'decrement') {
+      if (matchingItem.quantity > 1) {
+        matchingItem.quantity--;
+      } else {
+        // Remove the item from the cart when quantity goes below 1
+        const itemIndex = cart.findIndex((item) => item.productId === productId);
+        if (itemIndex !== -1) {
+          cart.splice(itemIndex, 1);
+        }
+      }
+    }
+
+
+    updateCartDisplay();
+  }
+}
+
+// Function to update the cart display
+function updateCartDisplay() {
+
 let cartQuantity = 0;
 let totalAmount = 0;
 
@@ -137,25 +167,44 @@ totalAmount += item.quantity * Number(product.price);
 const listItem = document.createElement('li');
 listItem.innerHTML = `
 <div class="cart-item">
-    <img src="${product.image}" alt="${product.name}" class="cart-item-image" width="50" height="75">
-    <div class="cart-item-details">
-      <span class="cart-item-name">${product.name}</span>
-      <div class="cart-item-info">
-        <div class="cart-item-price">Price: $${(item.quantity * Number(product.price)).toFixed(2)}</div>
-        <div class="cart-item-quantity">
-          <button class="cart-quantity-btn" data-action="decrement" data-product-id="${product.id}">-</button>
-          <span>${item.quantity}</span>
-          <button class="cart-quantity-btn" data-action="increment" data-product-id="${product.id}">+</button>
+      <img src="${product.image}" alt="${product.name}" class="cart-item-image" width="100" height="100">
+      <div class="cart-item-details">
+        <span class="cart-item-name">${product.name}</span>
+        <div class="cart-item-info">
+          <div class="cart-item-price">Price: $${(item.quantity * Number(product.price)).toFixed(2)}</div>
+          <div class="cart-item-quantity">
+            <button class="cart-quantity-btn-minus" data-action="decrement" data-product-id="${product.id}">-</button>
+            <span>${item.quantity}</span>
+            <button class="cart-quantity-btn-add" data-action="increment" data-product-id="${product.id}">+</button>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 `;
 listCard.appendChild(listItem);
 });
 
 document.querySelector('.js-cart-quantity').innerHTML = cartQuantity;
 document.querySelector('.total').innerHTML = `$${totalAmount.toFixed(2)}`;
+
+document.querySelectorAll('.cart-quantity-btn-add').forEach((button) => {
+  button.addEventListener('click', (event) => {
+    const productId = event.target.dataset.productId;
+    const action = 'increment';
+
+    
+handleQuantityButtonClick(productId, action);
   });
 });
+
+document.querySelectorAll('.cart-quantity-btn-minus').forEach((button) => {
+  button.addEventListener('click', (event) => {
+    const productId = event.target.dataset.productId;
+    const action = 'decrement';
+
+    handleQuantityButtonClick(productId, action);
+  });
+});
+
+}
 

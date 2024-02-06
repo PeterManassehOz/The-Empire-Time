@@ -136,7 +136,7 @@ align-items: center;
   border-color: salmon;
   box-shadow: 0 0 5px salmon;
 }
-button{
+.cart-add{
   padding: 10px 40px;
   background-color: blue;
   color:white;
@@ -145,7 +145,7 @@ button{
   cursor: pointer;
   transition: background-color 0.3s;
 }
-button:hover{
+.cart-add:hover{
   background-color: green;
 }
 .amount{
@@ -155,23 +155,37 @@ button:hover{
   font-weight: bolder;
 }
 /* Add these styles to your CSS file or within a <style> tag in your HTML */
+.listCard{
+  max-height: 500px;
+  overflow-y: auto;
+  padding: 10px;
+}
 .cart-item {
   display: flex;
   align-items: center;
-  margin-bottom: 10px;
+  margin-bottom: 5px; /* Increased margin for space between cart items */
+  text-align: center;
+  justify-content: space-between;
+  border: 1px solid #ccc;
+  padding: 6px;
+  max-width: max; /* Adjusted max-width for smaller cart items */
+  color:white;
 }
 
 .cart-item-image {
-  margin-right: 10px;
+  margin-right: 6px;
+  max-width: 100px; /* Adjusted max-width for smaller images */
 }
 
 .cart-item-details {
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 .cart-item-name {
-  margin-bottom: 5px;
+  margin-bottom: 2px;
+  font-weight: bold;
 }
 
 .cart-item-info {
@@ -181,6 +195,21 @@ button:hover{
 
 .cart-item-price,
 .cart-item-quantity {
-  margin-top: 5px;
+  margin-top: 2px;
 }
-
+.cart-quantity-btn-minus{
+  background-color: white;
+  color: red;
+  padding: 5px 20px;
+  border-radius: 5px;
+  font-weight: bold;
+  border: none;
+}
+.cart-quantity-btn-add{
+  background-color: white;
+  color: green;
+  padding: 5px 20px;
+  border-radius: 5px;
+  font-weight: bold;
+  border: none;
+}
