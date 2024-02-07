@@ -2,6 +2,7 @@ body{
   background-color: lightblue;
   font-family: system-ui;
 }
+
 .container{
   width: 1000px;
   margin: auto;
@@ -12,12 +13,13 @@ header{
   grid-template-columns: 1fr 50px;
   margin-top: 50px;
 }
+
+.shopping .bi{
+font-size: 30px;
+}
 header .shopping{
   position: relative;
   text-align: right;
-}
-header .shopping img{
- width: 40px;
 }
 header .shopping span{
   background-color: red;
